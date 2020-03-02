@@ -11,10 +11,11 @@ from draw import *
 import math
 
 def make_translate( x, y, z ):
-    t_matrix = ident(new_matrix())
+    t_matrix = new_matrix()
+    ident(t_matrix)
     stuff = [x,y,z]
     for index in range(3):
-        t_matrix[index][3] = stuff[index]
+        t_matrix[3][index] = stuff[index]
     
     return t_matrix
 
@@ -30,12 +31,16 @@ def make_scale( x, y, z ):
     return t_matrix
 
 def make_rotX( theta ):
-    return [[math.cos(theta),0,-math.sin(theta),0],[0,1,0,0],[math.sin(theta),0,math.cos(theta),0],[0,0,0,1]]
+     theta = theta * math.pi / 180
+     return [[1,0,0,0],[0,math.cos(theta),math.sin(theta),0],[0,-math.sin(theta),math.cos(theta),0],[0,0,0,1]]
 
 def make_rotY( theta ):
-    return [[1,0,0,0],[0,math.cos(theta),math.sin(theta),0],[0,-math.sin(theta),math.cos(theta),0],[0,0,0,1]]
+    theta = theta * math.pi / 180
+    return [[math.cos(theta),0,-math.sin(theta),0],[0,1,0,0],[math.sin(theta),0,math.cos(theta),0],[0,0,0,1]]
+    #return [[1,0,0,0],[0,round(math.cos(theta)),round(math.sin(theta)),0],[0,round(-math.sin(theta)),round(math.cos(theta)),0],[0,0,0,1]]
 
 def make_rotZ( theta ):
+    theta = theta * math.pi / 180
     return [[math.cos(theta),math.sin(theta),0,0],[-math.sin(theta),math.cos(theta),0,0],[0,0,1,0],[0,0,0,1]]
 
 

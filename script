@@ -47,5 +47,7 @@ rotate
 y 20
 apply
 display
+rotate
+y 90
 save
 pic.png

@@ -46,6 +46,12 @@ def parse_file( fname, points, transform, screen, color ):
       elif yesr[index] == 'ident':
             ident(t_matrix)
             index += 1
+      elif yesr[index] == 'move':
+            a = yesr[index + 1].split(' ')
+            m = make_translate(int(a[0]),int(a[1]),int(a[2]))
+            matrix_mult(m,t_matrix)
+            print_matrix(t_matrix)
+            index += 2
       elif yesr[index] == 'scale':
             a = yesr[index + 1].split(' ')
             print(a)
@@ -61,9 +67,12 @@ def parse_file( fname, points, transform, screen, color ):
             elif a[0] == 'z':
                   r = make_rotZ(int(a[1]))
             matrix_mult(r,t_matrix)
+            print_matrix(t_matrix)
             index += 2
       elif yesr[index] == 'apply':
+            print_matrix(o_matrix)
             matrix_mult(t_matrix,o_matrix)
+            print_matrix(o_matrix)
             index += 1
       elif yesr[index] == 'display':
             clear_screen(screen)
@@ -72,7 +81,7 @@ def parse_file( fname, points, transform, screen, color ):
             index += 1
       elif yesr[index] == 'save':
             clear_screen(screen)
-            draw_lines(o_matrix)
+            draw_lines(o_matrix,screen,color)
             save_extension(screen,fname)
             index += 1
       else:
